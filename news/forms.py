@@ -29,10 +29,10 @@ class UserRegisterForm(UserCreationForm):
 class NewsForm(forms.ModelForm):
     class Meta:
         model = News
-        fields = ['title', 'content', 'is_published', 'category']
+        fields = ['title', 'content', 'is_published', 'category', 'photo']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control mb-3'}),
             'content': forms.Textarea(attrs={'class': 'form-control mb-3', 'rows': 5}),
             'is_published': forms.CheckboxInput(attrs={'class': 'mb-3'}),
-            'category': forms.Select(attrs={'class': 'form-control mb-3'})
+            'category': forms.Select(attrs={'class': 'form-control mb-3'}),
         }

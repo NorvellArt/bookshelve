@@ -2,6 +2,12 @@ body{
 background-color: rgba(174,183,194,0.12);
 }
 
+.flex-gap{
+display: flex;
+gap: 16px;
+align-items: center;
+}
+
 .errorlist{
 color: red;
 }

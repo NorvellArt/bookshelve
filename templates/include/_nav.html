@@ -1,3 +1,8 @@
+{% url 'news' as news %}
+{% url 'add_news' as add_news %}
+{% url 'mail_sending' as mail_sending %}
+{% url 'my_books' as my_books %}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
         <a class="navbar-brand text-bg-primary" href="{% url 'news' %}">Книжная Полка</a>
@@ -8,19 +13,23 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url 'news' %}">Новости</a>
+                    <a class="nav-link text-white {% if request.path == news %} disabled {%endif%}" aria-current="page" href="{% url 'news' %}">Новости</a>
                 </li>
                 {% if request.user.is_staff %}
                 <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url 'add_news' %}">Добавить новость</a>
+                    <a class="nav-link text-white {% if request.path == add_news %} disabled {%endif%}" aria-current="page" href="{% url 'add_news' %}">Добавить новость</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url 'mail_sending' %}">Отправить новость</a>
+                    <a class="nav-link text-white {% if request.path == mail_sending %} disabled {%endif%}" aria-current="page" href="{% url 'mail_sending' %}">Отправить
+                        новость</a>
                 </li>
                 {% endif %}
+
+                {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Мои Книги</a>
+                    <a class="nav-link text-white {% if my_books in request.path %} disabled {%endif%}" href="my_books">Мои Книги</a>
                 </li>
+                {% endif %}
             </ul>
             <span class="navbar-text">
                 {% if request.user.is_authenticated %}
@@ -31,7 +40,7 @@
                 <a href="{% url 'register' %}">Регистрация</a>
                 |
                 <a href="{% url 'login' %}">Войти</a></span>
-                {% endif %}
+            {% endif %}
         </div>
     </div>
 </nav>

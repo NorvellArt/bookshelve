@@ -21,6 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls'), name='index'),
+    path('my_books/', include('my_books.urls'), name='my_books')
 ]
 
 if settings.DEBUG:

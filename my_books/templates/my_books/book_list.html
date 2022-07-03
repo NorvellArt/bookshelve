@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Мои Книги
+{% endblock %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-3">
+    {% for book in book_list %}
+
+
+    <div class="col">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h2>{{ book.title }}</h2>
+                <div class="row">
+                    <h5 class="col">Автор: </h5>
+                    <div class="col">{{ book.author }}</div>
+                </div>
+                <div class="row">
+                    <h5 class="col">Жанр: </h5>
+                    <div class="col">{{ book.genre }}</div>
+                </div>
+                <p class="card-text">{{ book.description|linebreaks|truncatewords:40 }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a href="{% url 'book' book.id %}" class="btn btn-sm btn-outline-secondary">Просмотр</a>
+                        <a href="{% url 'book_update' book.id %}"
+                           class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                        <a href="{% url 'delete_book' book.id %}"
+                           class="btn btn-sm btn-outline-secondary">Удалить</a>
+                    </div>
+                    {% if book.is_complete %}
+                    <b class="text-success">Прочитано</b>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+<!--<div><a href="{% url 'book' book.id %}">Просмотр</a></div>-->
+<!--<div><a href="{% url 'book_update' book.id %}">Редактировать</a></div>-->
+<!--<div><a href="{% url 'delete_book' book.id %}">Удалить</a></div>-->
